@@ -93,6 +93,7 @@ function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   let priceFound = cartList.reduce((sum, item) => sum + item.price, 0);
   console.log(priceFound);
+  return priceFound
 }
 
 // Exercise 4
@@ -119,20 +120,32 @@ function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].id === 1 && cart[i].quantity >= 3) {
-      let priceTotalid1 = cart[i].quantity * cart[i].price;
-      let applyDiscount = (priceTotalid1 * 20) / 100;
-      cart[i].subtotal = applyDiscount;
+      let priceTotalid1 = Number(cart[i].quantity * cart[i].price);
+      let applyDiscount1 = Number((priceTotalid1 * 20) / 100);
+      cart[i].subtotal = applyDiscount1;
+      cart[i].total = Number(priceTotalid1 - applyDiscount1)
     }
     if (cart[i].id === 3 && cart[i].quantity >= 10) {
-      let priceTotalid3 = cart[i].quantity * cart[i].price;
-      let applyDiscount3 = (priceTotalid3 * 30) / 100;
+      let priceTotalid3 = Number(cart[i].quantity * cart[i].price);
+      let applyDiscount3 = Number((priceTotalid3 * 30) / 100);
       cart[i].subtotal = applyDiscount3;
+      cart[i].total = Number(priceTotalid3 - applyDiscount3)
     }
-    if (cart[i].id === 1 && cart[i].quantity <= 3){
-      let priceTotalid1 = cart[i].quantity * cart[i].price;
+    if (cart[i].id === 1 && cart[i].quantity < 3){
+      let priceTotalid1 = Number(cart[i].quantity * cart[i].price);
+      cart[i].total = priceTotalid1;
     }
-return cart
+    if (cart[i].id === 3 && cart[i].quantity < 10){
+      let priceTotalid3 = Number(cart[i].quantity * cart[i].price);
+      cart[i].total = priceTotalid3;
+    }
+    if (cart[i].id !== 1 && cart[i].id !== 3){
+      let priceTotalid4 = Number(cart[i].quantity * cart[i].price);
+      cart[i].total = priceTotalid4;
+      cart[i].subtotal = 0;
+    }
   }
+  return cart
 }
 
 // Exercise 6
@@ -154,8 +167,8 @@ function printCart() {
   for (let i = 0; i < cart.length; i++) {
     const tr = document.createElement("tr");
     const th = document.createElement("th");
-    const td1 = document.createElement("td1");
     const td = document.createElement("td");
+    const td1 = document.createElement("td1");
     const td2 = document.createElement("td2");
     const td3 = document.createElement("td3");
     th.textContent = (cart[i].name);
@@ -170,18 +183,19 @@ function printCart() {
     tr.appendChild(td3);
     shoppingList.appendChild(tr);
 
-    cart.forEach(function (element, index) {
-      if (td2.textContent === undefined) {
-        td2.textContent === ((cart[i].quantity * cart[i].price.number));
-      }
+    cart.forEach(function () {
+     
       if (cart[i].id === 1 && cart[i].quantity < 3) {
-        td2.textContent === ((cart[i].quantity * cart[i].price.number));
+        td3.textContent == Number(cart[i].quantity * cart[i].price.number);
       }
       if (cart[i].id === 3 && cart[i].quantity < 10) {
-        td2.textContent === ((cart[i].quantity * cart[i].price.number));
+        td3.textContent == Number(cart[i].quantity * cart[i].price.number);
       }
-    })
+      if (cart[i].id !== 1 && cart[i].id !== 3  ) {
+        td2.textContent == Number(cart[i].quantity * cart[i].price.number);
+      }
 
+    })
 
   }
 }
