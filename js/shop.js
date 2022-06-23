@@ -98,7 +98,7 @@ function calculateTotal() {
 
 // Exercise 4
 function generateCart() {
-  // Using the "cartlist" array that contains all the items in the shopping cart,
+    // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
   for (let i = 0; i < cartList.length; i++) {
     const productFound = cart.find((product) => product.id === cartList[i].id);
@@ -117,6 +117,7 @@ function generateCart() {
 
 // Exercise 5
 function applyPromotionsCart() {
+  
   // Apply promotions to each item in the array "cart"
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].id === 1 && cart[i].quantity >= 3) {
@@ -134,18 +135,20 @@ function applyPromotionsCart() {
     if (cart[i].id === 1 && cart[i].quantity < 3){
       let priceTotalid1 = Number(cart[i].quantity * cart[i].price);
       cart[i].total = priceTotalid1;
+      cart[i].subtotal = 0;
     }
     if (cart[i].id === 3 && cart[i].quantity < 10){
       let priceTotalid3 = Number(cart[i].quantity * cart[i].price);
       cart[i].total = priceTotalid3;
+      cart[i].subtotal = 0;
     }
     if (cart[i].id !== 1 && cart[i].id !== 3){
       let priceTotalid4 = Number(cart[i].quantity * cart[i].price);
       cart[i].total = priceTotalid4;
       cart[i].subtotal = 0;
-    }
+    }    
   }
-  return cart
+  
 }
 
 // Exercise 6
@@ -153,14 +156,15 @@ function applyPromotionsCart() {
 
 function removeDefault() {
   var parent = document.getElementById('cart_list').getElementsByTagName('tr');
-  var child = parent.getElementsByTagName('tr');
-  var removed = parent.removeChild(child);
-  console.log(removed);
+  //var child = parent.getElementsByTagName('tr');
+  var removed = parent.removeChild(parent);
+  return removed; 
 }
 
 
 
 function printCart() {
+  
   // Parent element
   const shoppingList = document.getElementById("cart_list");
 
